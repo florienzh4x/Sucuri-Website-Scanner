@@ -1,36 +1,34 @@
-		dates=$(date +%d-%m-%y)
-		domain=$(echo $ceks | grep -Po '(?<="DOMAIN":)[^,]*' | tr -d '[]"')
-		ips=$(echo $ceks | grep -Po '(?<="IP":)[^,]*' | tr -d '[]"')
-		host=$(echo $ceks | grep -Po '(?<="HOSTING":)[^,]*' | tr -d '[]"')
-		system=$(echo $ceks | grep -Po '(?<="NOTICE":)[^},]*' | tr -d '[]"' | sed -e 's|\\/|/|g')
-		haswaf=$(echo $ceks | grep -Po '(?<="HASWAF":)[^,]*')
-		hassucuriwaf=$(echo $ceks | grep -Po '(?<="HASSUCURIWAF":)[^}]*')
-		blacklist=$(echo $ceks | grep -Po '(?<=Domain blacklisted by )[^",]*')
-		cleanon=$(echo $ceks | grep -Po '(?<=Domain clean on )[^",]*')
-		cleanby=$(echo $ceks | grep -Po '(?<=Domain clean by )[^",]*')
-		builddate=$(echo $ceks | grep -Po '(?<="BUILDDATE":)[^,]*' | tr -d '[]"')
-		dbdate=$(echo $ceks | grep -Po '(?<="DBDATE":)[^,]*' | tr -d '[]"')
-		compileddate=$(echo $ceks | grep -Po '(?<="COMPILEDDATE":)[^},]*' | tr -d '[]"')
-		status=$(echo $ceks | grep -Po '(?<="status":)[^,]*')
+		DATES=$(date +%d-%m-%y)
+		DOMAIN=$(echo $ceks | grep -Po '(?<="DOMAIN":)[^,]*' | tr -d '[]"')
+		IPS=$(echo $ceks | grep -Po '(?<="IP":)[^,]*' | tr -d '[]"')
+		HOST=$(echo $ceks | grep -Po '(?<="HOSTING":)[^,]*' | tr -d '[]"')
+		SYSTEM=$(echo $ceks | grep -Po '(?<="NOTICE":)[^},]*' | tr -d '[]"' | sed -e 's|\\/|/|g')
+		HASWAF=$(echo $ceks | grep -Po '(?<="HASWAF":)[^,]*')
+		HASSUCURIWAF=$(echo $ceks | grep -Po '(?<="HASSUCURIWAF":)[^}]*')
+		CLEANON=$(echo $ceks | grep -Po '(?<=Domain clean on )[^",]*')
+		CLEANBY=$(echo $ceks | grep -Po '(?<=Domain clean by )[^",]*')
+		BUILDDATE=$(echo $ceks | grep -Po '(?<="BUILDDATE":)[^,]*' | tr -d '[]"')
+		DBDATE=$(echo $ceks | grep -Po '(?<="DBDATE":)[^,]*' | tr -d '[]"')
+		COMPILEDDATE=$(echo $ceks | grep -Po '(?<="COMPILEDDATE":)[^},]*' | tr -d '[]"')
+		STATUS=$(echo $ceks | grep -Po '(?<="status":)[^,]*')
 		printf "${BOLD}"
 		printf "${WHITE}======================================\n"
 		printf "${WHITE}URL/DOMAIN : ${YELLOW}$1\n"
-		printf "${WHITE}IP : ${YELLOW}$ips\n"
-		printf "${WHITE}HOSTING : ${YELLOW}$host\n"
-		printf "${WHITE}SYSTEM : ${YELLOW}$system\n"
+		printf "${WHITE}IP : ${YELLOW}$IPS\n"
+		printf "${WHITE}HOSTING : ${YELLOW}$HOST\n"
+		printf "${WHITE}SYSTEM : ${YELLOW}$SYSTEM\n"
 		printf "${WHITE}======================================\n"
 		printf "${WHITE}WAF STATUS\n"
-		printf "${WHITE}HASWAF : ${YELLOW}$haswaf\n"
-		printf "${WHITE}HASSUCURIWAF : ${YELLOW}$hassucuriwaf\n"
+		printf "${WHITE}HASWAF : ${YELLOW}$HASWAF\n"
+		printf "${WHITE}HASSUCURIWAF : ${YELLOW}$HASSUCURIWAF\n"
 		printf "${WHITE}======================================\n"
-		printf "${WHITE}BLACKLIST : ${merah}TRUE\n\n"
-		printf "${WHITE}Domain Blacklisted by :\n${merah}$blacklist\n\n"
-		printf "${WHITE}Domain Clean by :\n${CYAN}$cleanon\n$cleanby\n"
+		printf "${WHITE}BLACKLIST : ${GREEN}FALSE\n\n"
+		printf "${WHITE}Domain Clean by :\n${CYAN}$CLEANBY\n$CLEANON\n"
 		printf "${WHITE}======================================\n"
-		printf "${WHITE}BUILDDATE : ${YELLOW}$builddate\n"
-		printf "${WHITE}DBDATE : ${YELLOW}$dbdate\n"
-		printf "${WHITE}COMPILEDDATE : ${YELLOW}$compileddate\n"
-		printf "${WHITE}STATUS : ${YELLOW}$status\n"
+		printf "${WHITE}BUILDDATE : ${YELLOW}$BUILDDATE\n"
+		printf "${WHITE}DBDATE : ${YELLOW}$DBDATE\n"
+		printf "${WHITE}COMPILEDDATE : ${YELLOW}$COMPILEDDATE\n"
+		printf "${WHITE}STATUS : ${YELLOW}$STATUS\n"
 		printf "${WHITE}======================================\n"
 		# save to file
 echo "======================================
@@ -43,16 +41,13 @@ WAF STATUS
 HASWAF : $HASWAF
 HASSUCURIWAF : $HASSUCURIWAF
 ======================================
-BLACKLIST : TRUE
-Domain Blacklisted by :
-$blacklist
-
+BLACKLIST : FALSE
 Domain Clean by :
-$cleanon
-$cleanby
+$CLEANBY
+$CLEANON
 ======================================
 BUILDDATE : $BUILDDATE
 DBDATE : $DBDATE
 COMPILEDDATE : $COMPILEDDATE
 STATUS : $STATUS
-======================================" >> Report-blacklist-$domain-$DATES.txt
+======================================" >> Report-clean-$DOMAIN-$DATES.txt
