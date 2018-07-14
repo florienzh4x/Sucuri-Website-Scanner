@@ -40,9 +40,9 @@ Method :
 1. Single Scan
 2. Mass Scan
 Choose Your Method : 1
-URL/DOMAIN : http://google.com/
+URL/DOMAIN : google.com
 ======================================
-URL/DOMAIN : http://google.com/
+URL/DOMAIN : google.com
 IP : 172.217.12.206
 HOSTING : 
 SYSTEM : 
