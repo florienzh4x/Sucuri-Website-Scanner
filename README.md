@@ -20,6 +20,7 @@ A simple tool for scanning website malware with Sucuri site check
 git clone https://github.com/florienzh4x/Sucuri-Website-Scanner sucuri
 cd sucuri
 chmod +x scan
+./scan
 ```
 # Output
 ```bash
