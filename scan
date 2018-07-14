@@ -1,0 +1,68 @@
+#!/bin/bash
+# SUCURI.NET SITE CHECK SCANNER Version 1.0
+# CODED BY MONKEY B LUFFY
+# COPYRIGHT Ⓒ 2018
+
+
+clear
+
+CYAN='\e[36m'
+BLUE='\e[34m'
+GREEN='\e[92m'
+WHITE='\e[37m'
+RED='\e[31m'
+YELLOW='\e[33m'
+GREENLIGHT='\e[39m'
+PURPLE='\e[35m'
+BOLD='\e[1m'
+
+banner(){
+printf "
+	${RED}__________________________________________________
+	   _____                       _              _   
+	  / ____|                     (_)            | |  
+	 | (___  _   _  ___ _   _ _ __ _   _ __   ___| |_ 
+	  \___ \| | | |/ __| | | | '__| | | '_ \ / _ \ __|${GREEN}
+	  ____) | |_| | (__| |_| | |  | |_| | | |  __/ |_ 
+	 |_____/ \__,_|\___|\__,_|_|  |_(_)_| |_|\___|\__|
+
+	   Sucuri Website Scanner CLI by Monkey B Luffy
+	 		  Version 1.0
+	 	 https://github.com/florienzh4x			
+	__________________________________________________
+
+"
+}
+scanning(){
+	ceks=$(curl -s "https://sitecheck.sucuri.net/api/v2/?json&scan=$1" -L)
+	if [[ ! $ceks =~ "WARN" ]]; then
+		source src/clean
+	else
+		source src/blacklist
+	fi
+}
+
+banner
+
+# SET URL/DOMAIN
+# read -p "URL/DOMAIN : " URL;
+echo "Method : "
+echo "1. Single Scan"
+echo "2. Mass Scan"
+read -p "Choose Your Method : " method;
+
+if [ $method -eq 1 ]; then
+	read -p "URL/DOMAIN : " URL;
+	for site in $URL; do
+		scanning $site
+	done
+elif [ $method -eq 2 ]; then
+	ls
+	read -p "LIST : " list;
+	for sites in $(cat $list); do
+		scanning $sites
+	done
+else
+	printf "Bad Options\n"
+	exit 0
+fi
