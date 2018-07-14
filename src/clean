@@ -1,0 +1,52 @@
+		DATES=$(date +%d-%m-%y)
+		IPS=$(echo $ceks | grep -Po '(?<="IP":)[^,]*' | tr -d '[]"')
+		HOST=$(echo $ceks | grep -Po '(?<="HOSTING":)[^,]*' | tr -d '[]"')
+		SYSTEM=$(echo $ceks | grep -Po '(?<="NOTICE":)[^},]*' | tr -d '[]"' | sed -e 's|\\/|/|g')
+		HASWAF=$(echo $ceks | grep -Po '(?<="HASWAF":)[^,]*')
+		HASSUCURIWAF=$(echo $ceks | grep -Po '(?<="HASSUCURIWAF":)[^}]*')
+		CLEANON=$(echo $ceks | grep -Po '(?<=Domain clean on )[^",]*')
+		CLEANBY=$(echo $ceks | grep -Po '(?<=Domain clean by )[^",]*')
+		BUILDDATE=$(echo $ceks | grep -Po '(?<="BUILDDATE":)[^,]*' | tr -d '[]"')
+		DBDATE=$(echo $ceks | grep -Po '(?<="DBDATE":)[^,]*' | tr -d '[]"')
+		COMPILEDDATE=$(echo $ceks | grep -Po '(?<="COMPILEDDATE":)[^},]*' | tr -d '[]"')
+		STATUS=$(echo $ceks | grep -Po '(?<="status":)[^,]*')
+		printf "${BOLD}"
+		printf "${WHITE}======================================\n"
+		printf "${WHITE}URL/DOMAIN : ${YELLOW}$1\n"
+		printf "${WHITE}IP : ${YELLOW}$IPS\n"
+		printf "${WHITE}HOSTING : ${YELLOW}$HOST\n"
+		printf "${WHITE}SYSTEM : ${YELLOW}$SYSTEM\n"
+		printf "${WHITE}======================================\n"
+		printf "${WHITE}WAF STATUS\n"
+		printf "${WHITE}HASWAF : ${YELLOW}$HASWAF\n"
+		printf "${WHITE}HASSUCURIWAF : ${YELLOW}$HASSUCURIWAF\n"
+		printf "${WHITE}======================================\n"
+		printf "${WHITE}BLACKLIST : ${GREEN}FALSE\n\n"
+		printf "${WHITE}Domain Clean by :\n${CYAN}$CLEANBY\n$CLEANON\n"
+		printf "${WHITE}======================================\n"
+		printf "${WHITE}BUILDDATE : ${YELLOW}$BUILDDATE\n"
+		printf "${WHITE}DBDATE : ${YELLOW}$DBDATE\n"
+		printf "${WHITE}COMPILEDDATE : ${YELLOW}$COMPILEDDATE\n"
+		printf "${WHITE}STATUS : ${YELLOW}$STATUS\n"
+		printf "${WHITE}======================================\n"
+		# save to file
+echo "======================================
+URL/DOMAIN : $1
+IP : $IPS
+HOSTING : $HOST
+SYSTEM : $SYSTEM
+======================================
+WAF STATUS
+HASWAF : $HASWAF
+HASSUCURIWAF : $HASSUCURIWAF
+======================================
+BLACKLIST : FALSE
+Domain Clean by :
+$CLEANBY
+$CLEANON
+======================================
+BUILDDATE : $BUILDDATE
+DBDATE : $DBDATE
+COMPILEDDATE : $COMPILEDDATE
+STATUS : $STATUS
+======================================" >> Report-clean-$DATES.txt
