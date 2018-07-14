@@ -1,5 +1,4 @@
 		dates=$(date +%d-%m-%y)
-		domain=$(echo $ceks | grep -Po '(?<="DOMAIN":)[^,]*' | tr -d '[]"')
 		ips=$(echo $ceks | grep -Po '(?<="IP":)[^,]*' | tr -d '[]"')
 		host=$(echo $ceks | grep -Po '(?<="HOSTING":)[^,]*' | tr -d '[]"')
 		system=$(echo $ceks | grep -Po '(?<="NOTICE":)[^},]*' | tr -d '[]"' | sed -e 's|\\/|/|g')
@@ -55,4 +54,4 @@ BUILDDATE : $BUILDDATE
 DBDATE : $DBDATE
 COMPILEDDATE : $COMPILEDDATE
 STATUS : $STATUS
-======================================" >> Report-blacklist-$domain-$DATES.txt
+======================================" >> Report-blacklist-$DATES.txt
