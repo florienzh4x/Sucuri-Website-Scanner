@@ -1,5 +1,4 @@
 		DATES=$(date +%d-%m-%y)
-		DOMAIN=$(echo $ceks | grep -Po '(?<="DOMAIN":)[^,]*' | tr -d '[]"')
 		IPS=$(echo $ceks | grep -Po '(?<="IP":)[^,]*' | tr -d '[]"')
 		HOST=$(echo $ceks | grep -Po '(?<="HOSTING":)[^,]*' | tr -d '[]"')
 		SYSTEM=$(echo $ceks | grep -Po '(?<="NOTICE":)[^},]*' | tr -d '[]"' | sed -e 's|\\/|/|g')
@@ -50,4 +49,4 @@ BUILDDATE : $BUILDDATE
 DBDATE : $DBDATE
 COMPILEDDATE : $COMPILEDDATE
 STATUS : $STATUS
-======================================" >> Report-clean-$DOMAIN-$DATES.txt
+======================================" >> Report-clean-$DATES.txt
